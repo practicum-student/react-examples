@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background: white;
+      font-family: Helvetica Neue, Arial, sans-serif;
+      font-size: 16px;
+      color: #333333;
+    }
+
+    input {
+      margin-top: 20px;
+      width: 240px;
+      font-size: 16px;
+      border: 2px solid #afcae2;
+      outline: none;
+      border-radius: 8px;
+      padding: 8px;
+      color: #7e91a3;
+      transition: background-color .15s;
+    }
+
+    input:hover {
+      border-color: #9eb6cc !important;
+    }
+
+    input:focus {
+      border-color: #7e91a3 !important;
+    }
+  </style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/jsx">
+  function MessageComposer() {
+    const [value, setValue] = React.useState('');
+    const counterRef = React.useRef(0);
+
+    function handleChange(e) {
+      setValue(e.target.value);
+    }
+
+    return (
+      <>
+        <input type="text" value={value} onChange={handleChange} />
+        <h4>Renders: {++counterRef.current}</h4>
+      </>
+    );
+  }
+
+  ReactDOM.render((
+    <MessageComposer />
+  ), document.querySelector('#root'));
+</script>
+</body>
+</html>

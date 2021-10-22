@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .day {
+            background: white;
+            color: #333333;
+        }
+
+        .night {
+            background: #444444;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/jsx">
+  function App() {
+    const [theme, setTheme] = React.useState('day');
+
+    function handleLangChange(e) {
+      setTheme(e.target.value);
+    }
+
+    return (
+      // Первое использование theme
+      <div className={theme}>
+        <h2>Добро пожаловать</h2>
+        {/* Второе использование theme */}
+        <ThemeIcon theme={theme} />
+        {/* Третье использование theme */}
+        <LangSelect theme={theme} onChange={handleLangChange} />
+      </div>
+    );
+  }
+
+  function ThemeIcon(props) {
+    return (
+      <div className="icon">
+        {props.theme === 'day' ? '☀️' : '🌙'}
+      </div>
+    );
+  }
+
+  function LangSelect(props) {
+    return (
+      <select onChange={props.onChange}>
+        <option value="day">День {props.theme === 'day' && '✅'}</option>
+        <option value="night">Ночь {props.theme === 'night' && '✅'}</option>
+      </select>
+    );
+  }
+
+  ReactDOM.render((
+    <App />
+  ), document.querySelector('#root'));
+</script>
+</body>
+</html>

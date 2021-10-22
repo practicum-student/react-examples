@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    body {
+      background: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .modal {
+      width: 400px;
+      height: 300px;
+      border-radius: 10px;
+      border: 1px dashed black;
+      box-shadow: 0 .25rem .5rem .1rem rgba(114, 114, 114, .25);
+      background: rgba(249, 249, 249, .8);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/jsx">
+  class App extends React.Component {
+    constructor(props) {
+      super(props);
+
+      this.state = { shouldShowScale: false };
+    }
+
+    handleChange = () => {
+      this.setState({
+        shouldShowScale: !this.state.shouldShowScale,
+      });
+    };
+
+    render() {
+      return (
+        <>
+          <label>
+            <input type="checkbox" onChange={this.handleChange} />
+            — Показать измеритель экрана
+          </label>
+          {this.state.shouldShowScale && <Scale />}
+        </>
+      );
+    }
+  }
+
+  class Scale extends React.Component {
+    constructor() {
+      super();
+
+      this.state = {
+        windowSize: [window.innerWidth, window.innerHeight],
+      };
+    }
+
+    componentDidMount() {
+      window.addEventListener('resize', this.handleWindowResize);
+    }
+
+    componentWillUnmount() {
+      window.removeEventListener('resize', this.handleWindowResize);
+    }
+
+    handleWindowResize = () => {
+      this.setState({
+        windowSize: [window.innerWidth, window.innerHeight],
+      });
+    };
+
+    render() {
+      return (
+        <div className="overlay">
+          <div className="modal">
+            <h3>Размер окна:</h3>
+            <h2>{this.state.windowSize[0]} x {this.state.windowSize[1]}</h2>
+          </div>
+        </div>
+      );
+    }
+  }
+
+  ReactDOM.render((
+    <App />
+  ), document.querySelector('#root'));
+</script>
+</body>
+</html>

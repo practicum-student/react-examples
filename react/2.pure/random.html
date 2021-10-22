@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background: white;
+      font-family: Helvetica Neue, Arial, sans-serif;
+      font-size: 12px;
+      color: #333333;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .chat {
+      width: 340px;
+      height: 75px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f5f6fc;
+      border-radius: 10px;
+      margin: 10px 0;
+      padding: 0 10px;
+    }
+
+    .chat img {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .chat h2 {
+      flex: 1;
+      margin-left: 15px;
+    }
+
+    .chat .date {
+      height: 100%;
+      padding-top: 10px;
+    }
+
+    .chat-with-tools {
+      width: 340px;
+      position: relative;
+    }
+
+    .chat-with-tools .tools {
+      position: absolute;
+      bottom: 7px;
+      right: 7px;
+    }
+
+    .chat-with-tools .tools button {
+      background: #afcae2;
+      border: 0;
+      color: white;
+      border-radius: 3px;
+      margin-left: 5px;
+      cursor: pointer;
+      outline: none;
+      transition: background-color .15s;
+    }
+
+    button:hover {
+      background: #9eb6cc !important;
+    }
+
+    button:active {
+      background: #7e91a3 !important;
+    }
+  </style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/jsx">
+  const Chat = (props) => {
+    return (
+      <div className="chat">
+        <img src={`https://ajaxy.github.io/yandex-practicum-test/img/${props.id}.png`} width="75" />
+        <h2>{Math.random()}</h2>
+        <div className="date">{props.lastMessageAt}</div>
+      </div>
+    );
+  };
+
+  const ChatWithTools = (props) => {
+    const [shouldShowTools, setShouldShowTools] = React.useState(false);
+
+    function handleMouseEnter() {
+      setShouldShowTools(true);
+    }
+
+    function handleMouseLeave() {
+      setShouldShowTools(false);
+    }
+
+    return (
+      <div className="chat-with-tools" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+        <Chat {...props} />
+        {shouldShowTools && (
+          <div className="tools">
+            <button>Mute</button>
+            <button>Delete</button>
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  const chats = [{
+    id: 8,
+    name: 'James',
+    lastMessageAt: '20:55',
+  }, {
+    id: 10,
+    name: 'Gregory',
+    lastMessageAt: '20:45',
+  }, {
+    id: 5,
+    name: 'Allison',
+    lastMessageAt: '12:31',
+  }];
+
+  ReactDOM.render((
+    <>
+      <h2>Chats</h2>
+      {chats.map((chat) => (
+        <ChatWithTools id={chat.id} name={chat.name} lastMessageAt={chat.lastMessageAt} />
+      ))}
+    </>
+  ), document.querySelector('#root'));
+</script>
+</body>
+</html>

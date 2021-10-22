@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background: white;
+      font-family: Helvetica Neue, Arial, sans-serif;
+      font-size: 16px;
+      color: #333333;
+    }
+
+    button {
+      width: 240px;
+      font-size: 20px;
+      background: #afcae2;
+      border: 0;
+      color: white;
+      border-radius: 8px;
+      margin-top: 5px;
+      padding: 8px;
+      display: block;
+      cursor: pointer;
+      outline: none;
+      transition: background-color .15s;
+    }
+
+    button:hover {
+      background: #9eb6cc !important;
+    }
+
+    button:active {
+      background: #7e91a3 !important;
+    }
+
+    video {
+      width: 240px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/jsx">
+  function VideoPlayer() {
+    const videoRef = React.useRef();
+
+    function handleClick() {
+      videoRef.current.play();
+    }
+
+    return (
+      <>
+        <video ref={videoRef} src="./clip.mp4" />
+        <button onClick={handleClick}>▶️</button>
+      </>
+    );
+  }
+
+  ReactDOM.render((
+    <VideoPlayer />
+  ), document.querySelector('#root'));
+</script>
+</body>
+</html>

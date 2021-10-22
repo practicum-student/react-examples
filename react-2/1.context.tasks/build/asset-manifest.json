@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/static/css/main.3ad6b746.chunk.css",
+    "main.js": "/static/js/main.343406f4.chunk.js",
+    "main.js.map": "/static/js/main.343406f4.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.2c854d87.js",
+    "runtime-main.js.map": "/static/js/runtime-main.2c854d87.js.map",
+    "static/js/2.c87e3013.chunk.js": "/static/js/2.c87e3013.chunk.js",
+    "static/js/2.c87e3013.chunk.js.map": "/static/js/2.c87e3013.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.990447ec3099df8dce89ead4282e2f72.js": "/precache-manifest.990447ec3099df8dce89ead4282e2f72.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.3ad6b746.chunk.css.map": "/static/css/main.3ad6b746.chunk.css.map",
+    "static/js/2.c87e3013.chunk.js.LICENSE.txt": "/static/js/2.c87e3013.chunk.js.LICENSE.txt",
+    "static/media/InfoForm.css": "/static/media/Roboto.58bf8e0b.woff",
+    "static/media/Header.css": "/static/media/Robotocondensed.21406600.woff",
+    "static/media/bed.svg": "/static/media/bed.9c64c02a.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2c854d87.js",
+    "static/js/2.c87e3013.chunk.js",
+    "static/css/main.3ad6b746.chunk.css",
+    "static/js/main.343406f4.chunk.js"
+  ]
+}

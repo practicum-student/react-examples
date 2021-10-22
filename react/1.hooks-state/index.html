@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background: white;
+      font-family: Helvetica Neue, Arial, sans-serif;
+      font-size: 12px;
+      color: #333333;
+    }
+
+    .row {
+      display: flex;
+    }
+
+    .user {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 10px;
+      font-size: 16px;
+      color: #335588;
+    }
+
+    .user img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-bottom: 5px;
+      object-fit: cover;
+    }
+
+    .user .rating {
+      width: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .user .rating button {
+      margin: 5px;
+      background: 0;
+      border: 0;
+      font-size: large;
+    }
+
+    .user .rating button:not([disabled]) {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/jsx">
+  // Функциональный компонент `User`
+  function User(props) {
+    // Хук, управляющий внутренним состоянием.
+    const [rating, setRating] = React.useState(0);
+
+    function handleLike () {
+      setRating(1);
+    }
+
+    function handleDislike() {
+      setRating(-1);
+    }
+
+    return (
+      <div className="user">
+        <img src={`https://ajaxy.github.io/yandex-practicum-test/img/${props.id}.png`} width="75" />
+        {props.name}
+        <div className="rating">
+          <button onClick={handleLike} disabled={rating > 0}>👍</button>
+          {rating}
+          <button onClick={handleDislike} disabled={rating < 0}>👎</button>
+        </div>
+      </div>
+    );
+  }
+
+  ReactDOM.render((
+    <>
+      <h2>Мои воображаемые друзья:</h2>
+      <div className="row">
+        <User id="10" name="Gregory" />
+        <User id="8" name="James" />
+        <User id="5" name="Allison" />
+      </div>
+    </>
+  ), document.querySelector('#root'));
+</script>
+</body>
+</html>

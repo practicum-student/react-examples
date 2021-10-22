@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .day {
+            background: white;
+            color: #333333;
+        }
+
+        .night {
+            background: #444444;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/jsx">
+  const translations = {
+    en: {
+      greeting: 'Hello',
+    },
+    ru: {
+      greeting: 'Привет',
+    },
+  };
+
+  const TranslationContext = React.createContext();
+
+  const CurrentUserContext = React.createContext();
+
+  function App() {
+    // Стейт, отвечающий за текущий язык
+    const [lang, setLang] = React.useState('ru');
+    // Стейт, отвечающий за данные текущего пользователя
+    const [currentUser, setCurrentUser] = React.useState({ name: 'Алёша' });
+
+    function handleChange(e) {
+      setLang(e.target.value);
+    }
+
+    return (
+      // «Внедряем» данные из translations[lang] с помощью провайдера первого контекста
+      <TranslationContext.Provider value={translations[lang]}>
+        {/* «Внедряем» данные из currentUser с помощью провайдера второго контекста */}
+        <CurrentUserContext.Provider value={currentUser}>
+          {/* Поддерево, в котором будет доступен контекст */}
+          <Main />
+          <select onChange={handleChange}>
+            <option value="ru">Russian</option>
+            <option value="en">English</option>
+          </select>
+        </CurrentUserContext.Provider>
+      </TranslationContext.Provider>
+    );
+  }
+
+  function Main() {
+    return (
+      <Header />
+    );
+  }
+
+  function Header() {
+    // Подписываемся на контекст TranslationContext
+    const translation = React.useContext(TranslationContext);
+    // Подписываемся на контекст CurrentUserContext
+    const currentUser = React.useContext(CurrentUserContext);
+
+    return (
+      <h1>
+        {translation.greeting}
+      </h1>
+    );
+  }
+
+  ReactDOM.render((
+    <App />
+  ), document.querySelector('#root'));
+</script>
+</body>
+</html>

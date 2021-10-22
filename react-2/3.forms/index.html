@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .day {
+            background: white;
+            color: #333333;
+        }
+
+        .night {
+            background: #444444;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/jsx">
+  function Input() {
+    const [value, setValue] = React.useState('');
+
+    function handleChange(e) {
+      setValue(e.target.value);
+    }
+
+    function handleShow() {
+      alert(value);
+    }
+
+    function handleClear() {
+      setValue('');
+    }
+
+    return (
+      <>
+        <input type="text" value={value} onChange={handleChange} />
+        <button onClick={handleShow}>Показать</button>
+        <button onClick={handleClear}>Очистить</button>
+      </>
+    );
+  }
+
+  ReactDOM.render((
+    <Input />
+  ), document.querySelector('#root'));
+</script>
+</body>
+</html>
