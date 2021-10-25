@@ -78,16 +78,13 @@
 
         render() {
           return (
-            <div>
-              <img
-                src={`https://code.s3.yandex.net/web-code/react/${this.props.id}.png`}
-                width="75"
-              />
-              <p>{this.props.name}</p>
+            <div className="user">
+              <img src={`https://ajaxy.github.io/yandex-practicum-test/img/${this.props.id}.png`} width="75" />
+              {this.props.name}
               <div className="rating">
-                <button onClick={this.handleLike}>👍</button>
+                <button onClick={this.handleLike} disabled={this.state.rating > 0}>👍</button>
                 {this.state.rating}
-                <button onClick={this.handleDislike}>👎</button>
+                <button onClick={this.handleDislike} disabled={this.state.rating < 0}>👎</button>
               </div>
             </div>
           );
